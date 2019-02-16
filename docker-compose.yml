@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  php:
+    network_mode: bridge
+    build:
+      context: ./.docker/php-fpm
+    volumes:
+      - ./.docker/php-fpm/php:/usr/local/etc/php:ro,cached
+      - .:/app:rw,cached
+      - ./var:/app/var:rw
+    expose:
+      - 9000
+    user: '1000'
+    external_links:
+      - br-local-env_mysql_1_7bf2cd48540d
+
+  nginx:
+    container_name: 'app.docker'
+    network_mode: bridge
+    build: .docker/nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./public:/app/public:ro
+      - ./.docker/nginx/etc/nginx:/etc/nginx:ro,cached
+    links:
+      - php
