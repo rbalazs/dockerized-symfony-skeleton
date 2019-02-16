@@ -12,8 +12,6 @@ services:
     expose:
       - 9000
     user: '1000'
-    external_links:
-      - br-local-env_mysql_1_7bf2cd48540d
 
   nginx:
     container_name: 'app.docker'
