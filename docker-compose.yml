@@ -2,13 +2,14 @@ version: '3.4'
 
 services:
   php:
+    container_name: 'app-php_fpm'
     network_mode: bridge
     build:
       context: ./.docker/php-fpm
     volumes:
       - ./.docker/php-fpm/php:/usr/local/etc/php:ro,cached
       - .:/app:rw,cached
-      - ./var:/app/var:rw
+      - ./var:/app/var:rw,delegated
     expose:
       - 9000
     user: '1000'
