@@ -26,3 +26,9 @@ services:
       - ./.docker/nginx/etc/nginx:/etc/nginx:ro,cached
     links:
       - php
+
+  nodejs:
+    network_mode: bridge
+    build: .docker/nodejs
+    volumes:
+      - .:/app:rw,delegated
