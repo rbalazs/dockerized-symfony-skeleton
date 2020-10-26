@@ -1,4 +1,4 @@
-FROM php:7.1.3-fpm
+FROM php:7.4-fpm
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN docker-php-ext-install pdo pdo_mysql
 
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
-COPY --from=composer:1.1 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
 
 RUN usermod -u 1000 www-data
 
